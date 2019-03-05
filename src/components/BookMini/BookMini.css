@@ -1,0 +1,41 @@
+.mini-container
+{
+    width: 150px;
+    border: 1px solid black;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: white;
+    font-size: 14px;
+}
+
+.mini-container:hover
+{
+    box-shadow: 3px 2px black;
+    cursor: pointer;
+}
+
+.mini-name, .mini-author
+{
+    width: fit-content;
+    align-self: center;
+    text-align: center;
+    margin: 5px 10px;
+}
+
+.mini-name
+{
+    border-bottom: 1px solid black;
+    margin-bottom: 0;
+    padding-bottom: 3px;
+    font-size: 1.2em;
+    box-sizing: border-box;
+}
+
+.mini-author
+{
+    margin-top: 2px;
+    font-style: italic;
+    font-size: 1.1em;
+}

@@ -1,0 +1,12 @@
+.sort-container
+{
+    display: inline-block;
+    align-content: center;
+}
+
+.sorting-option
+{
+    text-decoration: underline;
+    margin: 0 4px;
+}
+
