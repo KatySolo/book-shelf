@@ -7,6 +7,19 @@
 .sorting-option
 {
     text-decoration: underline;
-    margin: 0 4px;
+    margin: 2px 4px;
 }
 
+.sorting-option:hover
+{
+    cursor: pointer;
+}
+
+.completed
+{
+    margin-left: 0;
+    margin-top: 5px;
+}
+/*.sorting-option:after {*/
+    /*content: '↑';*/
+/*}*/

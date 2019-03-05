@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import BookShelf from './components/BookShelf/BookShelf'
 import SearchBar from './components/SearchBar/SearchBar'
 import SortBar from './components/SortBar/SortBar'
-import {searchBook}  from './api/ApiWorker'
+import {searchBook, sortBooks}  from './api/ApiWorker'
 import './App.css';
 
 class App extends Component {
@@ -12,11 +12,12 @@ class App extends Component {
             books: this.props.books,
             searching_query: '',
             sorting_query: '',
-            sorting_order: ''
+            desc_order: ''
         };
         this.handleSearchQuery = this.handleSearchQuery.bind(this);
         this.handleSortingQuery = this.handleSortingQuery.bind(this);
         this.performSearch = this.performSearch.bind(this);
+        this.performSort = this.performSort.bind(this);
     }
 
     handleSearchQuery(query) {
@@ -33,11 +34,18 @@ class App extends Component {
     }
 
     handleSortingQuery(query) {
-        const {value, order} = query;
+        const {field, isDesc, isComplete} = query;
         this.setState({
-            sorting_query: value,
-            sorting_order: order
-        });
+            sorting_query: field,
+            desc_order: isDesc
+        },()=>{this.performSort(isComplete)});
+    }
+
+    performSort(isComplete){
+        const books = sortBooks(this.state.sorting_query, this.state.desc_order, isComplete);
+        this.setState({
+            books: books
+        },()=>{});
     }
 
     render() {
