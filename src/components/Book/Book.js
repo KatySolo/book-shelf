@@ -10,7 +10,7 @@ export default function Book(props) {
                 <span className='book-author'>{props.info.author}</span>
             </div>
             <div className='book-description'>Description: {props.info.description}</div>
-            <div className='book-complete'>Book is complete: {props.info.isComplete}</div>
+            <div className='book-complete'>Book is complete: {props.info.visibility}</div>
         </div>
     );
 }

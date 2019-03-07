@@ -1,15 +1,40 @@
 import React, {Component} from 'react'
+import {
+    setSortingField,
+    setSortingOrder,
+    setCompleteVisibility,
+    BookVisibilities,
+    OrderOptions,
+    SortingOptions
+} from '../../actions'
 import './SortBar.css'
+import {connect} from 'react-redux'
+
+function mapDispatchToProps(dispatch) {
+    return {
+        setSortField: field => dispatch(setSortingField(field)),
+        setSortOrder: order => dispatch(setSortingOrder(order)),
+        setCompleteVisibility: visibility => dispatch(setCompleteVisibility(visibility))
+    }
+}
 
 class SortBar extends Component {
     constructor() {
         super();
         this.state = {
-            field: 'name',
-            isDesc: true,
-            isComplete: false
+            field: SortingOptions.BY_NAME,
+            order: OrderOptions.DESC,
+            visibility: BookVisibilities.SHOW_ALL
         };
     }
+
+    // changeStoreState() {
+    //     this.props.setSortField(this.state.field);
+    //     this.props.setSortOrder(this.state.order);
+    //     this.props.setCompleteVisibility(this.state.visibility);
+    //
+    //     //string, bool, bool
+    // }
 
     render() {
         return (
@@ -17,47 +42,69 @@ class SortBar extends Component {
                 Сортировать по
                 <span className='sorting-option' onClick={() => {
                     this.setState({
-                            field: 'name',
-                            isDesc: !this.state.isDesc,
-                            isComplete: false
-                        },
-                        () => {
-                            this.props.handler(this.state)
-                        })
+                        field: SortingOptions.BY_NAME,
+                        order: (this.state.order === OrderOptions.DESC) ?
+                            OrderOptions.ASC : OrderOptions.DESC,
+                        visibility: this.state.visibility
+                    }, () => {
+                        console.log(this.state.order); //not changing 
+                        this.props.setSortField(this.state.field);
+                        this.props.setSortOrder(this.state.order);
+                    });
                 }}> имени
-                    {this.state.field === 'name' && !this.state.isDesc && (' ↑')}
-                    {this.state.field === 'name' && this.state.isDesc && (' ↓')}
+                    {this.state.field === SortingOptions.BY_NAME && this.state.order === OrderOptions.ASC && (' ↑')}
+                    {this.state.field === SortingOptions.BY_NAME && this.state.order === OrderOptions.DESC && (' ↓')}
                 </span>
+
                 <span className='sorting-option' onClick={() => {
                     this.setState({
-                            field: 'author',
-                            isDesc: !this.state.isDesc,
-                            isComplete: false
-                        },
-                        () => {
-                            this.props.handler(this.state)
-                        })
-                }}> автору {this.state.field === 'author' && !this.state.isDesc && ('↑')}
-                {this.state.field === 'author' && this.state.isDesc && ('↓')}
-                </span>
+                        field: SortingOptions.BY_AUTHOR,
+                        order: (this.state.order === OrderOptions.DESC) ?
+                            OrderOptions.ASC : OrderOptions.DESC,
+                        visibility: this.state.visibility
+                    }, () => {
+                        this.props.setSortField(this.state.field);
+                        this.props.setSortOrder(this.state.order);
+                    });
+                }}> автору
+                    {this.state.field === SortingOptions.BY_AUTHOR && this.state.order === OrderOptions.ASC && (' ↑')}
+                    {this.state.field === SortingOptions.BY_AUTHOR && this.state.order === OrderOptions.DESC && (' ↓')}
+                    </span>
+
                 <div className='sorting-option completed' onClick={() => {
                     this.setState({
-                            field: 'complete',
-                            isDesc: !this.state.isDesc,
-                            isComplete: !this.state.isComplete
-                        },
-                        () => {
-                            this.props.handler(this.state)
-                        })
+                        field: SortingOptions.BY_COMPLETED,
+                        order: (this.state.order === OrderOptions.DESC) ?
+                            OrderOptions.ASC : OrderOptions.DESC,
+                        visibility: (this.state.visibility === BookVisibilities.SHOW_ALL) ?
+                            BookVisibilities.SHOW_COMPLETED : BookVisibilities.SHOW_ALL
+                    }, () => this.props.setCompleteVisibility(this.state.visibility));
                 }}> Показать
-                    {this.state.field !== 'complete' && !this.state.isComplete && (' непрочитанные')}
-                    {this.state.field !== 'complete' && this.state.isComplete && (' все')}
-                    {this.state.field === 'complete' && !this.state.isComplete && (' непрочитанные')}
-                    {this.state.field === 'complete' && this.state.isComplete && (' все')}
+                    {this.state.field !== SortingOptions.BY_COMPLETED &&
+                    this.state.visibility === BookVisibilities.SHOW_ALL && (' непрочитанные')}
+                    {this.state.field !== SortingOptions.BY_COMPLETED &&
+                    this.state.visibility === BookVisibilities.SHOW_COMPLETED && (' все')}
+                    {this.state.field === SortingOptions.BY_COMPLETED &&
+                    this.state.visibility === BookVisibilities.SHOW_ALL && (' непрочитанные')}
+                    {this.state.field === SortingOptions.BY_COMPLETED &&
+                    this.state.visibility === BookVisibilities.SHOW_COMPLETED && (' все')}
+                </div>
+                <div className='sorting-option reset' onClick={() => {
+                    this.setState({
+                        field: SortingOptions.BY_NAME,
+                        order: OrderOptions.DESC,
+                        visibility: BookVisibilities.SHOW_ALL
+                    }, () => {
+                        this.props.setSortField(this.state.field);
+                        this.props.setSortOrder(this.state.order);
+                        this.props.setCompleteVisibility(this.state.visibility)
+                    });
+                }}>Сбросить
                 </div>
             </div>
         );
     }
 }
 
-export default SortBar
+const SortingBar = connect(null,mapDispatchToProps)(SortBar);
+export default SortingBar

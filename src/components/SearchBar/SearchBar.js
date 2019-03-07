@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
 
+
 class SearchBar extends Component {
     constructor(props) {
         super(props);
+        // console.log(props);
         this.state = {
             searching_query: ''
         };
@@ -10,14 +12,14 @@ class SearchBar extends Component {
     }
 
     handleInput(value) {
-        this.setState({searching_query: value.target.value}, this.props.handler(value.target.value));
+        this.setState({searching_query: value.target.value});
     }
 
     render() {
         return (
             <div className='search-container'>
                 <input type='text' placeholder='Введите название'
-                       value={this.state.searching_query} onChange={this.handleInput}/>
+                       value={this.props.searchingQuery} onChange={this.handleInput}/>
             </div>
         );
     }

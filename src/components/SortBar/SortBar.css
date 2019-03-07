@@ -15,7 +15,8 @@
     cursor: pointer;
 }
 
-.completed
+.completed,
+.reset
 {
     margin-left: 0;
     margin-top: 5px;
