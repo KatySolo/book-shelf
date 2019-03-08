@@ -7,19 +7,21 @@
 //     })
 // }
 
+import {SortingOptions} from "../actions";
+
 export function sortBooks(books, field, option) {
-    console.log(books, field, option);
+    // console.log(books, field, option);
     switch (field) {
-        case 'name':
+        case SortingOptions.BY_NAME:
             return books.sort(function (a, b) {
                 return (option === 'DESC') ? a.name >= b.name : a.name <= b.name;
             });
-        case 'complete':
+        case SortingOptions.BY_COMPLETED:
             if (option === 'SHOW_COMPLETED') {
                 return books.filter((a) => a.visibility);
             }
             return books;
-        case 'author':
+        case SortingOptions.BY_AUTHOR:
             return books.sort(function (a, b) {
                 return ((option === 'DESC')) ? a.author >= b.author : a.author <= b.author;
             });

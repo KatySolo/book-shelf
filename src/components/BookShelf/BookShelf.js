@@ -5,15 +5,17 @@ import { connect } from 'react-redux'
 
 
 const mapStateToProps = state => {
+    console.log(state.books);
     return {books: state.books}
 };
-
-const BookShelf = ({books}) => (
+//todo bookshelf not changing a state
+const BookShelf = (props) => (
         <div className="shelf-container">
-            {books.length === 0 && (
+            {console.log(props)}
+            {props.books.length === 0 && (
                 <div>Книги не найдены</div>
             )}
-        {books.map(function (item, index) {
+        {props.books.map(function (item, index) {
             return <BookMini info={item} key={index}/>
         })}
         </div>

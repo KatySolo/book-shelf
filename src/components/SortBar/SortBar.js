@@ -28,14 +28,6 @@ class SortBar extends Component {
         };
     }
 
-    // changeStoreState() {
-    //     this.props.setSortField(this.state.field);
-    //     this.props.setSortOrder(this.state.order);
-    //     this.props.setCompleteVisibility(this.state.visibility);
-    //
-    //     //string, bool, bool
-    // }
-
     render() {
         return (
             <div className='sort-container'>
@@ -47,7 +39,8 @@ class SortBar extends Component {
                             OrderOptions.ASC : OrderOptions.DESC,
                         visibility: this.state.visibility
                     }, () => {
-                        console.log(this.state.order); //not changing 
+                        // console.log('changing name order');
+                        // console.log(this.state.order); //not changing
                         this.props.setSortField(this.state.field);
                         this.props.setSortOrder(this.state.order);
                     });
