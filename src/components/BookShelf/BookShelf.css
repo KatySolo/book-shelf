@@ -2,12 +2,12 @@
 {
     width: fit-content;
     max-width: 700px;
-    min-width: 650px;
+    min-width: 700px;
     flex-wrap: wrap;
     display: flex;
     justify-content: space-evenly;
     flex-direction: row;
-    border-color: #340e11 #78281F #340e11 #78281F  ;
+    border-color: #340e11 #78281F #340e11 #78281F;
     border-width: 5px;
     border-style: solid;
     background: lightsalmon;

@@ -2,6 +2,8 @@
 {
     display: inline-block;
     align-content: center;
+    width: fit-content;
+    justify-self: end;
 }
 
 .sorting-option
@@ -21,6 +23,4 @@
     margin-left: 0;
     margin-top: 5px;
 }
-/*.sorting-option:after {*/
-    /*content: '↑';*/
-/*}*/
+

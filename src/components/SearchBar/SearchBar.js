@@ -1,28 +1,37 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {setQuery} from '../../actions';
 
 
-class SearchBar extends Component {
-    constructor(props) {
-        super(props);
-        // console.log(props);
-        this.state = {
-            searching_query: ''
-        };
-        this.handleInput = this.handleInput.bind(this);
-    }
-
-    handleInput(value) {
-        this.setState({searching_query: value.target.value});
-    }
-
-    render() {
-        return (
-            <div className='search-container'>
-                <input type='text' placeholder='Введите название'
-                       value={this.props.searchingQuery} onChange={this.handleInput}/>
-            </div>
-        );
-    }
+function mapDispatchToProps(dispatch) {
+  return {
+    setQuery: (query) => dispatch(setQuery(query)),
+  };
 }
 
-export default SearchBar
+class SearchBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: '',
+    };
+  }
+
+  render() {
+    return (
+      <div className='search-container'>
+        <input type='text' placeholder='Поиск по названию'
+          value={this.state.query} onChange={(a) => {
+            this.setState({
+              query: a.target.value,
+            }, () => {
+              this.props.setQuery(this.state.query);
+            });
+          }}/>
+      </div>
+    );
+  }
+}
+
+const ConnectedSearchingBar = connect(null, mapDispatchToProps)(SearchBar);
+export default ConnectedSearchingBar;
