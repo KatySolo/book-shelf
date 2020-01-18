@@ -1,0 +1,67 @@
+.add-form {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.add-input
+{
+    grid-column: 1;
+    margin-left: 2px;
+}
+
+.additional-container
+{
+    grid-column: 2;
+    /*width: fit-content;*/
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-around;
+}
+
+.completed-container {
+    /*margin: 5px;*/
+}
+
+.add-button
+{
+    padding: 0;
+    margin: 0;
+    width: 50%;
+    min-width: 100px;
+}
+
+.add-input:hover {
+    cursor: none;
+    box-shadow: none;
+}
+.title-input,
+.author-input
+{
+    text-align: center;
+    border: none;
+    width: 100%;
+}
+
+.title-input:focus,
+.author-input:focus
+{
+    outline: none;
+}
+
+.add-label:hover,
+.hide-label:hover
+{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.hide-label
+{
+    color: grey;
+}
+
+.add-container
+{
+    /*height: 50px;*/
+}
