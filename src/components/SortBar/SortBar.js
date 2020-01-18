@@ -98,7 +98,6 @@ class SortBar extends Component {
             this.props.setSortField(SortingOptions.BY_NAME);
             this.props.setSortOrder(OrderOptions.DESC);
             this.props.setCompleteVisibility(BookVisibilities.SHOW_ALL);
-            console.log(this.state.field, this.state.order);
           });
         }}>Сбросить
         </div>
